@@ -12,7 +12,8 @@ export class UserAuthComponent implements OnInit {
   authmode = 'login';
   loginForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private user: UsersService) { }
+  abc: HTMLElement;
+  constructor(private formBuilder: FormBuilder, private userService: UsersService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -20,7 +21,6 @@ export class UserAuthComponent implements OnInit {
       password: ['', Validators.required],
       useremail: ['', [Validators.email, Validators.required]]
     });
-
     // reset login status
     // this.authenticationService.logout();
 
@@ -56,27 +56,28 @@ export class UserAuthComponent implements OnInit {
     if (this.authmode === 'login') {
       this.authmode = 'signup';
       this.currentmode = 'login';
+      this.loginForm.reset();
     } else {
       this.authmode = 'login';
       this.currentmode = 'signup';
+      this.loginForm.reset();
     }
   }
 
   onSubmit() {
 
     if (this.currentmode === 'login') {
-      const name = this.loginForm.value.username;
+      const email = this.loginForm.value.useremail;
       const password = this.loginForm.value.password;
-
-      this.user.authUser(name, password).subscribe((res) => {
-        console.log('Login');
-        console.log(res);
-    });
+      this.userService.authUser({email, password});
     } else {
       const name = this.loginForm.value.username;
       const email = this.loginForm.value.useremail;
       const password = this.loginForm.value.password;
-      this.user.addUser(name, email, password);
+      this.userService.addUser({name, email, password});
     }
+    // setInterval(() => {
+    //   console.log("back");
+    //  this.abc = this.userService.htmlElement},5000);
   }
 }

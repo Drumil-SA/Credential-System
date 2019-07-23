@@ -8,12 +8,15 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { AppRoutingModule } from './app-routing-module';
 import {UsersService} from '../app/user-service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     UserAuthComponent,
     HeaderComponent,
     ProjectDetailComponent,
+    UserProfileComponent,
 
   ],
   imports: [

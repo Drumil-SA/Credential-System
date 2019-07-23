@@ -1,0 +1,16 @@
+<h1>Hello {{ Username }}</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h3>User Profile</h3>
+            <h4>Name : {{ userName }}</h4>
+            <h4>email : {{ emailId }}</h4>
+            <h4>total uploaded projects : {{ numberProject }}</h4>
+            <hr/>
+            <div *ngFor="let project of projects">
+                
+            </div>
+        </div> 
+    </div>
+</div>

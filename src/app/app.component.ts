@@ -9,9 +9,9 @@ import { UsersService } from './user-service';
 export class AppComponent implements OnInit {
   title = 'project';
 
-  constructor(private user: UsersService){  }
+  constructor(private user: UsersService) {  }
 
-  ngOnInit(){
+  ngOnInit() {
         // this.user.getUsers();
   }
 }
