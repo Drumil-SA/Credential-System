@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLinkActive="active" routerLink="/user-profile">Project Manager</a>
+    <a class="navbar-brand" routerLinkActive="active" routerLink="/home-page">Project Manager</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,12 +10,12 @@
           <a class="nav-link" routerLink="/user-profile" routerLinkActive="active">My Profile</a>
         </li>
         <li class="nav-item" routerLinkActive = "active">
-          <a routerLink="/user-profile" routerLinkActive="active" class="nav-link">upload new project</a>
+          <a routerLink="/project-edit" routerLinkActive="active" class="nav-link">upload new project</a>
         </li>
         <li class="nav-item" routerLinkActive = "active">
          <a routerLink="/user-auth" routerLinkActive="active" class="nav-link">Shared Project</a>
         </li>
-        <li class="nav-item" routerLinkActive = "active">
+        <li class="nav-item" routerLinkActive = "active" (click)="logout()">
           <a style="cursor: pointer"  class="nav-link">Logout</a>
         </li>
         <!-- <li class="nav-item dropdown" appDropdown >

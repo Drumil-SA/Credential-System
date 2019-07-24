@@ -1,14 +1,19 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { NgModule } from '@angular/core';
 import { ProjectDetailComponent } from '../app/project-detail/project-detail.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { UsersService } from './user-service';
+import { AuthGuard } from './helper/auth.guard';
+
 const routes: Routes = [
-  {path: '', redirectTo: '/user-auth', pathMatch: 'full'},
+  {path: '', redirectTo: '/home-page', pathMatch: 'full', canActivate : [AuthGuard]},
+  {path: 'home-page', component: HomePageComponent},
   {path: 'user-auth', component: UserAuthComponent},
-  {path: 'user-profile', component: UserProfileComponent },
-  {path: 'project-edit', component : ProjectDetailComponent}
+  {path: 'user-profile', component: UserProfileComponent , pathMatch: 'full' , canActivate: [AuthGuard]},
+  {path: 'project-edit', component : ProjectDetailComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -16,4 +21,22 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule {
+  constructor(
+    private router: Router,
+    private userService: UsersService
+) { }
+
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const currentUser = this.userService.currentUserValue;
+    if (currentUser) {
+        // logged in so return true
+        return true;
+    }
+
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
+}
+}

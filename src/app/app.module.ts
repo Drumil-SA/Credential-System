@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing-module';
 import {UsersService} from '../app/user-service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     HeaderComponent,
     ProjectDetailComponent,
     UserProfileComponent,
+    HomePageComponent,
 
   ],
   imports: [
