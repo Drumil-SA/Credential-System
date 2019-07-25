@@ -8,7 +8,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-
+  userId = '';
+  userName = '';
   constructor(private userService: UsersService, private formBuilder: FormBuilder) { }
   projectForm: FormGroup;
   ngOnInit() {
@@ -20,14 +21,27 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    const userId = this.userService.currentUserValue.id;
-    const userName = this.userService.currentUserValue.name;
-    const userObj = { userId , userName};
+    const token = localStorage.getItem('currentUser');
+    // const userId = this.userService.currentUserValue.id;
+    // const userName = this.userService.currentUserValue.name;
+    this.userService.userProfile(token).subscribe((userData) => {
+      console.log('Inside Submit');
+      console.log(userData);
+      this.userId = userData['_id'];
+      this.userName = userData['name'];
+    });
+    const userObj = { id: this.userId , username : this.userName};
     const sharedTo = [];
-    const projectFile = this.projectForm.value.projectFile;
+    let projectFileURL = '';
     const projectTitle = this.projectForm.value.projectTitle;
+    this.userService.getAWSFileURL(projectTitle).subscribe((res) => {
+      if(res){
+        console.log(res.URL);
+        projectFileURL = res.URL;
+      }
+    });
     const projectDescription = this.projectForm.value.projectDescription;
-    this.userService.addProject({projectFile, projectTitle, projectDescription, userObj, sharedTo}).subscribe((res) => {
+    this.userService.addProject({projectFileURL , projectTitle, projectDescription, userObj, sharedTo}).subscribe((res) => {
       if (res) {
         console.log(res);
       } else {

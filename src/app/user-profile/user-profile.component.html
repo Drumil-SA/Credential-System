@@ -1,17 +1,25 @@
+
+<div class="jumbotron">
+  <h1>Hello {{ username }}</h1>
+  <h4>email : {{ email }}</h4>
+  <h4>total uploaded projects : {{ numberOfProjects }}</h4>
+</div>
+
+
+
 <div class="container">
   <div class="row">
-    <h1>Hello {{ username }}</h1>
-
+    
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-6 col-md-offset-3">
-          <h3>User Profile</h3>
-          <h4>email : {{ email }}</h4>
-          <h4>total uploaded projects : {{ numberOfProjects }}</h4>
-          <hr />
+         
           <div *ngFor="let project of projects"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<button class="btn btn-primary" style="text-align: right" (click)="projectEdit()">Create new project</button>

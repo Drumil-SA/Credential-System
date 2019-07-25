@@ -39,22 +39,23 @@ export class UsersService {
     return this.currentUserSubject.value;
 }
 
-  userProfile(user) {
-    this.http.post(this.url + '/user-profile', user).subscribe((res) => {
-      if (res) {
-        console.log(res);
-      }
-    });
+  userProfile(token) {
+    console.log('Inside userProfile');
+    console.log(token);
+    console.log({token});
+    return this.http.post(this.url + '/userProfile', token);
   }
 
 
   loginUser(user) {
     return this.http.post(this.url + '/login', user)
-    .pipe(map(user => {
+    .pipe(map(token => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
-      return user;
+      console.log('inside LoginUser');
+      localStorage.setItem('currentUser', JSON.stringify(token));
+      this.currentUserSubject.next(token); // token
+      console.log(token);
+      return token;
   }));
 }
 
@@ -73,6 +74,10 @@ export class UsersService {
 
   addProject(project) {
     return this.http.post(this.url + '/addProject', project);
+  }
+  
+  getAWSFileURL(fileTitle){
+    return this.http.post<{URL: string}>(this.url + '/getS3URL', fileTitle);
   }
   
   logout() {

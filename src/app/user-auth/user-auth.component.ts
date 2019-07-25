@@ -72,6 +72,7 @@ export class UserAuthComponent implements OnInit {
         if (res) {
           console.log(res);
           this.router.navigate(['/user-profile']);
+          // const userData = this.getUserProfile(res);
         } else {
           alert('Login fail');
         }
@@ -83,7 +84,7 @@ export class UserAuthComponent implements OnInit {
           // console.log(this.htmlElement);
       });
 
-    } else  if (this.currentmode === 'signup'){
+    } else  if (this.currentmode === 'signup') {
       const name = this.loginForm.value.username;
       const email = this.loginForm.value.useremail;
       const password = this.loginForm.value.password;
