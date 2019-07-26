@@ -42,10 +42,13 @@ export class UsersService {
   userProfile(token) {
     console.log('Inside userProfile');
     console.log(token);
-    console.log({token});
+    // console.log({token});
     return this.http.post(this.url + '/userProfile', token);
   }
 
+  getUserData(token){
+    return this.http.post(this.url + '/getUserData', token);
+  }
 
   loginUser(user) {
     return this.http.post(this.url + '/login', user)
@@ -78,6 +81,11 @@ export class UsersService {
   
   getAWSFileURL(fileTitle){
     return this.http.post<{URL: string}>(this.url + '/getS3URL', fileTitle);
+  }
+
+  getUserProjects(tokenObj) {
+    console.log('Calling backend getUserProject');
+    return this.http.post(this.url + '/getUserProjects', tokenObj);
   }
   
   logout() {

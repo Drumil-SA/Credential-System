@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private userService: UsersService,private router: Router) { }
+  constructor(private userService: UsersService, private router: Router) { }
   username = '';
   email = '';
   numberOfProjects: number;
+  userProjects = {};
   ngOnInit() {
     console.log('Inside user profile component');
     const token = localStorage.getItem('currentUser');
@@ -26,15 +27,28 @@ export class UserProfileComponent implements OnInit {
     // this.username = this.userService.currentUserValue.name;
   }
   getUserProfile(token) {
+    console.log(token);
     this.userService.userProfile(token).subscribe((userData) => {
-      console.log('Inside Submit');
+      console.log('Inside get User Profile');
       console.log(userData);
       this.username = userData['name'];
       this.email = userData['email'];
     });
+    this.getUserProjects(token);
   }
 
-  projectEdit(){
-    this.router.navigate(['project-edit']);
+  projectEdit() {
+    this.router.navigate(['/project-edit']);
+  }
+
+
+  getUserProjects(tokenObj) {
+    console.log("get user project");
+    this.userService.getUserProjects(tokenObj).subscribe((res) => {
+      if (res) {
+        console.log('Angular' + res);
+        this.userProjects = res;
+      }
+    });
   }
 }

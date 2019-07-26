@@ -10,6 +10,7 @@ import {UsersService} from '../app/user-service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     ProjectDetailComponent,
     UserProfileComponent,
     HomePageComponent,
+    ProjectListComponent,
 
   ],
   imports: [

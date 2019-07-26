@@ -6,20 +6,20 @@
 </div>
 
 
-
+<button class="btn btn-primary" style="text-align: right" (click)="projectEdit()">Create new project</button><br/><br/><br/>
 <div class="container">
   <div class="row">
-    
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-6 col-md-offset-3">
-         
-          <div *ngFor="let project of projects"></div>
+            <app-project-list></app-project-list>
+            <div>
+              <div *ngFor="let item of userProjects">
+                <a>{{item.projectTitle}}</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<button class="btn btn-primary" style="text-align: right" (click)="projectEdit()">Create new project</button>

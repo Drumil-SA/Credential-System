@@ -19,7 +19,8 @@ export class UserAuthComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username:  ['', Validators.required],
       password: ['', Validators.required],
-      useremail: ['', [Validators.email, Validators.required]]
+      useremail:
+      ['', [Validators.email, Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
     });
     // reset login status
     // this.authenticationService.logout();
