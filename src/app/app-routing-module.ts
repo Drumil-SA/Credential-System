@@ -2,16 +2,20 @@ import { RouterModule, Routes, Router, ActivatedRouteSnapshot, RouterStateSnapsh
 
 import { NgModule } from '@angular/core';
 import { ProjectDetailComponent } from '../app/project-detail/project-detail.component';
-import { UserAuthComponent } from './user-auth/user-auth.component';
+import { UserLoginComponent } from './user-auth-login/user-auth.component';
+import { UserSignupComponent } from './user-auth-signup/user-auth-signup.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UsersService } from './user-service';
 import { AuthGuard } from './helper/auth.guard';
+import { SharedProjectComponent } from './shared-project/shared-project.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home-page', pathMatch: 'full', canActivate : [AuthGuard]},
   {path: 'home-page', component: HomePageComponent},
-  {path: 'user-auth', component: UserAuthComponent},
+  {path: 'user-login', component: UserLoginComponent},
+  {path: 'user-signup', component: UserSignupComponent},
+  {path: 'shared-project', component: SharedProjectComponent, canActivate : [AuthGuard]},
   {path: 'user-profile', component: UserProfileComponent , pathMatch: 'full' , canActivate: [AuthGuard]},
   {path: 'project-edit', component : ProjectDetailComponent, canActivate: [AuthGuard]}
 ];
@@ -36,7 +40,7 @@ export class AppRoutingModule {
     }
 
     // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/user-login']);
     return false;
 }
 }

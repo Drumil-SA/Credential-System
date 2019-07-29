@@ -8,12 +8,27 @@ import { UsersService } from '../user-service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private userService: UsersService) { }
-
+  constructor(public userService: UsersService) { }
+  isLoged = false;
   ngOnInit() {
+   
+    // this.userService.isLoggedIn(tokenObj).subscribe((res) => {
+    //   if (res) {
+    //     this.isLoged = true;
+    //   } else {
+    //     this.isLoged = false;
+    //   }
+    // }, err => {
+    //   this.isLoged = false;
+    // });
   }
+
+  isLoggedIn() {
+    return !!this.userService.isLoggedIn();
+  }
+  
   logout() {
-    console.log("logout");
+    console.log('logout');
     this.userService.logout();
   }
 }

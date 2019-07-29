@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../user-service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class ProjectDetailComponent implements OnInit {
   userId = '';
   userName = '';
-  constructor(private userService: UsersService, private formBuilder: FormBuilder) { }
+  constructor(private userService: UsersService, private formBuilder: FormBuilder, private router: Router) { }
   projectForm: FormGroup;
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
@@ -52,6 +53,7 @@ export class ProjectDetailComponent implements OnInit {
             this.userService.addProject({ projectFileURL, projectTitle, projectDescription, createdBy, sharedTo }).subscribe( res1 => {
               if (res1) {
                 console.log(res1);
+                this.router.navigate(['/user-profile']);
               } else {
                 console.log('Add project fail');
               }

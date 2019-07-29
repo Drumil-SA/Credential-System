@@ -1,4 +1,5 @@
-<div class="list-group">
+<h1>My projects</h1>
+<!-- <div class="list-group">
     <a href="#" class="list-group-item active waves-light" mdbWavesEffect>
       Cras justo odio
     </a>
@@ -6,4 +7,44 @@
     <a href="#" class="list-group-item waves-light" mdbWavesEffect>Morbi leo risus</a>
     <a href="#" class="list-group-item waves-light" mdbWavesEffect>Porta ac consectetur ac</a>
     <a href="#" class="list-group-item waves-light" mdbWavesEffect>Vestibulum at eros</a>
+</div> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <div *ngFor="let item of userProjects">
+          <!-- <div class="card">
+            <a href="#" class="list-group-item waves-light" mdbWavesEffect >{{item.projectTitle}}</a>
+            <a [routerLink]="['/project-edit']" class="btn btn-warning">Edit</a> |
+            <a [routerLink]="['/shared-project']" class="btn btn-success">Share</a> |
+            <a (click)="deleteProject(id)" class="btn btn-danger">Delete</a>
+            </div> -->
+
+          <div class="card" style="width: 20rem;">
+            <div class="card-body">
+              <a class="card-title" (click)="displayProjectDetail(item._id)"
+                >{{ item.projectTitle }}</a
+              >
+              <hr />
+              <div class="buttons">
+                <a
+                  [routerLink]="['/project-edit']"
+                  class="card-link btn btn-warning"
+                  >Edit
+                </a>
+                <a
+                  [routerLink]="['/shared-project']"
+                  class="card-link btn btn-success"
+                  >Share
+                </a>
+                <a (click)="deleteProject(item._id)" class="card-link btn btn-danger"
+                  >Delete
+                </a>
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+  </div>
 </div>

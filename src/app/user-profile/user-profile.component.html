@@ -1,25 +1,13 @@
-
 <div class="jumbotron">
   <h1>Hello {{ username }}</h1>
   <h4>email : {{ email }}</h4>
   <h4>total uploaded projects : {{ numberOfProjects }}</h4>
+  <br/>
+<button class="btn btn-primary" style="text-align: right" (click)="projectEdit()">Create new project</button>
 </div>
 
-
-<button class="btn btn-primary" style="text-align: right" (click)="projectEdit()">Create new project</button><br/><br/><br/>
-<div class="container">
-  <div class="row">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <app-project-list></app-project-list>
-            <div>
-              <div *ngFor="let item of userProjects">
-                <a>{{item.projectTitle}}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<hr>
+<app-project-list></app-project-list>
+<div>
+  <h1>{{ ActivityTitle }}</h1>
+</div>

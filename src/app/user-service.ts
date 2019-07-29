@@ -46,7 +46,7 @@ export class UsersService {
     return this.http.post(this.url + '/userProfile', token);
   }
 
-  getUserData(token){
+  getUserData(token) {
     return this.http.post(this.url + '/getUserData', token);
   }
 
@@ -61,6 +61,8 @@ export class UsersService {
       return token;
   }));
 }
+   userProject:any;
+   selectProjectId:any;
 
   // tslint:disable-next-line: no-shadowed-variable
   addUser(newUser: newUser) {
@@ -78,20 +80,40 @@ export class UsersService {
   addProject(project) {
     return this.http.post(this.url + '/addProject', project);
   }
-  
-  getAWSFileURL(fileTitle){
+
+  getAWSFileURL(fileTitle) {
     return this.http.post<{URL: string}>(this.url + '/getS3URL', fileTitle);
   }
 
   getUserProjects(tokenObj) {
     console.log('Calling backend getUserProject');
+    console.log(tokenObj);
     return this.http.post(this.url + '/getUserProjects', tokenObj);
   }
-  
+
+  getProjectDetail(id: any) {
+    console.log('Calling project detail');
+    console.log(id);
+    return this.http.post(this.url + '/getProjectDetail', {id : id});
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['/user-auth']);
+    this.router.navigate(['/user-login']);
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem('currentUser');
+    // return !!this.http.post('/isLoggedIn', tokenObj);
+  }
+
+  getToken() {
+    if (localStorage.getItem('currentUser')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

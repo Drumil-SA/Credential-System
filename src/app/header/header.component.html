@@ -6,17 +6,23 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/user-profile" routerLinkActive="active">My Profile</a>
-        </li>
         <li class="nav-item" routerLinkActive = "active">
-          <a routerLink="/project-edit" routerLinkActive="active" class="nav-link">upload new project</a>
+          <a routerLink="user-login" routerLinkActive="active" class="nav-link" *ngIf="!isLoggedIn()">Login</a>
         </li>
-        <li class="nav-item" routerLinkActive = "active">
-         <a routerLink="/user-auth" routerLinkActive="active" class="nav-link">Shared Project</a>
+        <li class="nav-item" >
+            <a routerLink="/user-signup" routerLinkActive="active" class="nav-link" *ngIf='!isLoggedIn()'>Signup</a>
         </li>
-        <li class="nav-item" routerLinkActive = "active" (click)="logout()">
-          <a style="cursor: pointer"  class="nav-link">Logout</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user-profile" routerLinkActive="active" *ngIf="!!isLoggedIn()">My Profile</a>
+        </li>
+        <li class="nav-item" >
+          <a routerLink="/project-edit" routerLinkActive="active" class="nav-link" *ngIf="!!isLoggedIn()">upload new project</a>
+        </li>
+        <li class="nav-item">
+         <a routerLink="/shared-project" routerLinkActive="active" class="nav-link" *ngIf="!!isLoggedIn()">Shared Project</a>
+        </li>
+        <li class="nav-item" (click)="logout()">
+          <a style="cursor: pointer"  class="nav-link" *ngIf="isLoggedIn()">Logout</a>
         </li>
         <!-- <li class="nav-item dropdown" appDropdown >
           <a class="nav-link dropdown-toggle" id="navbarDropdown" style="cursor: pointer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
