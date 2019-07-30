@@ -8,10 +8,9 @@
     <a href="#" class="list-group-item waves-light" mdbWavesEffect>Porta ac consectetur ac</a>
     <a href="#" class="list-group-item waves-light" mdbWavesEffect>Vestibulum at eros</a>
 </div> -->
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+<div class="project">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
         <div *ngFor="let item of userProjects">
           <!-- <div class="card">
             <a href="#" class="list-group-item waves-light" mdbWavesEffect >{{item.projectTitle}}</a>
@@ -20,11 +19,11 @@
             <a (click)="deleteProject(id)" class="btn btn-danger">Delete</a>
             </div> -->
 
-          <div class="card" style="width: 20rem;">
+          <div class="box" style="width: 80%">
             <div class="card-body">
-              <a class="card-title" (click)="displayProjectDetail(item._id)"
-                >{{ item.projectTitle }}</a
-              >
+              <a class="card-title" (click)="displayProjectDetail(item._id)">{{
+                item.projectTitle
+              }}</a>
               <hr />
               <div class="buttons">
                 <a
@@ -37,7 +36,9 @@
                   class="card-link btn btn-success"
                   >Share
                 </a>
-                <a (click)="deleteProject(item._id)" class="card-link btn btn-danger"
+                <a
+                  (click)=deleteProject(item._id)
+                  class="card-link btn btn-danger"
                   >Delete
                 </a>
               </div>
@@ -46,5 +47,23 @@
           <br />
         </div>
       </div>
+    </div>
+  </div>
+  <hr />
+  <div *ngIf="displayProjectDescription === true">
+    <div>
+      <h1> Project Details </h1>
+      <h4>Project title : {{ projectTitle }}</h4>
+    </div>
+    <div>
+      <h4>
+        Download Project :<a href="{{ projectURL }}">{{ projectURL }}</a>
+      </h4>
+    </div>
+    <div>
+      <h4>
+        About Project :  {{projectDescription }}
+      </h4>
+    </div>
   </div>
 </div>

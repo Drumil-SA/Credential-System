@@ -15,11 +15,13 @@ export class UserProfileComponent implements OnInit {
   email = '';
   numberOfProjects: number;
   userProjects: any;
+  
   ngOnInit() {
     console.log('Inside user profile component');
     const token = localStorage.getItem('currentUser');
     // console.log(typeof(token));
     this.getUserProfile(JSON.parse(token));
+    this.getUserProjects(token);
     // // console.log(this.userService.currentUserValue);
     // this.username = this.userService.currentUserValue.name;
     // this.email = this.userService.currentUserValue.email;
@@ -33,7 +35,6 @@ export class UserProfileComponent implements OnInit {
       this.username = userData['name'];
       this.email = userData['email'];
     });
-    this.getUserProjects(token);
   }
 
   projectEdit() {

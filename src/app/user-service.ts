@@ -42,7 +42,6 @@ export class UsersService {
   userProfile(token) {
     console.log('Inside userProfile');
     console.log(token);
-    // console.log({token});
     return this.http.post(this.url + '/userProfile', token);
   }
 
@@ -88,13 +87,19 @@ export class UsersService {
   getUserProjects(tokenObj) {
     console.log('Calling backend getUserProject');
     console.log(tokenObj);
-    return this.http.post(this.url + '/getUserProjects', tokenObj);
+    return this.http.post(this.url + '/getUserProjects', {tokenObj});
   }
 
   getProjectDetail(id: any) {
     console.log('Calling project detail');
     console.log(id);
     return this.http.post(this.url + '/getProjectDetail', {id : id});
+  }
+
+  deleteProject(id: any) {
+    console.log('Project delete');
+    console.log(id);
+    return this.http.post(this.url + '/deleteProject', {id : id});
   }
 
   logout() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../user-service';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-project-list',
@@ -8,11 +9,15 @@ import { UsersService } from '../user-service';
 })
 export class ProjectListComponent implements OnInit {
   userProjects: any;
-  project = {};
-  constructor(private userService: UsersService) { }
+  projectTitle: string;
+  projectURL: string;
+  displayProjectDescription = false;
+  projectDescription: string;
+  tokenObj: any;
+  constructor(private userService: UsersService, private userProfile: UserProfileComponent) { }
 
   ngOnInit() {
-    const tokenObj = localStorage.getItem('currentUser');
+    this.tokenObj = localStorage.getItem('currentUser');
     // this.getUserProjects(tokenObj);
     this.setUserProject();
   }
@@ -33,15 +38,28 @@ export class ProjectListComponent implements OnInit {
   //     console.log(err);
   //   });
   // }
-  
   displayProjectDetail(id) {
     // this.userService.selectProjectId = id;
     // console.log('Display project');
+    this.displayProjectDescription = true;
     console.log(id);
     this.userService.getProjectDetail(id).subscribe((res) => {
-      this.project = res;
-      console.log('project' + this.project);
+      console.log(res);
+      // this.project = res;
+      this.projectTitle = res['projectData']['projectTitle'];
+      this.projectURL = res['projectData']['projectFileURL'];
+      this.projectDescription = res['projectData']['projectDescription'];
+      // console.log(this.project.projectTitle);
     }, (err) => {
+      console.log(err);
+    });
+  }
+
+  deleteProject(id) {
+    this.userService.deleteProject(id).subscribe(res => {
+      console.log(res);
+      this.userProfile.getUserProjects(this.tokenObj);
+    }, err => {
       console.log(err);
     });
   }
